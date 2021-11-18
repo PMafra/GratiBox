@@ -10,5 +10,6 @@ const createHeaders = (token) => ({
 });
 
 const signUp = (body) => axios.post(`${API_URL}/sign-up`, body);
+const signIn = (body) => axios.post(`${API_URL}/sign-in`, body);
 
-export default signUp;
+export { signUp, signIn };
