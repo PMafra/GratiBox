@@ -23,6 +23,12 @@
             {
                 "js": "ignorePackages"
             }
-           ]
+        ],
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-filename-extension": [
+            0
+        ],
+        "react/function-component-definition": "off"
     }
 }
