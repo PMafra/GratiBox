@@ -10,9 +10,11 @@ const StyledButton = styled.button`
     font-size: 21px;
     border: none;
 `;
-const StyledLinkButton = styled.p`
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 20px;
+const StyledLinkButton = styled.div`
+    .swapLink {
+        color: #ffffff;
+        font-weight: 700;
+        font-size: 20px;
+    }
 `;
 export { StyledButton, StyledLinkButton };
