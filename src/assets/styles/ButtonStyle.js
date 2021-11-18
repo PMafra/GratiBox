@@ -1,20 +1,30 @@
 import styled from 'styled-components';
 
 const StyledButton = styled.button`
-    background-color:#8C97EA;
+    background-color:#6D7CE4;
+    border: none;
+    border-right: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
     width: 220px;
     height: 55px;
-    border-radius: 10px;
     color: #ffffff;
     font-weight: 700;
     font-size: 21px;
-    border: none;
+    :active {
+        border: none;
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+    }
 `;
 const StyledLinkButton = styled.div`
+    margin-top: 7px;
+    text-align: center;
+    line-height: 21px;
+    width: 220px;
     .swapLink {
         color: #ffffff;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 17px;
     }
 `;
 export { StyledButton, StyledLinkButton };

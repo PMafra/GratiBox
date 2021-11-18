@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -9,7 +8,7 @@ import {
 } from '../assets/styles/SignStyle';
 import { StyledButton, StyledLinkButton } from '../assets/styles/ButtonStyle';
 import { StyledGreetings } from '../assets/styles/SharedStyle';
-import signUp from '../services/api';
+import { signUp } from '../services/api';
 
 export default function SignUp() {
   const [name, setName] = useState('');
@@ -39,8 +38,6 @@ export default function SignUp() {
     const isRepeatedPasswordValid = validateRepeatedPassword();
     if (!isRepeatedPasswordValid) return;
 
-    setIsSignUpSucess(true);
-    setMessage('Conta criada com sucesso!');
     const signUpBody = {
       name,
       email,
@@ -111,7 +108,7 @@ export default function SignUp() {
         </StyledButton>
         <StyledLinkButton>
           <Link to="/sign-in" className="swapLink">
-            Logar
+            Já é grato? Faça login!
           </Link>
         </StyledLinkButton>
       </StyledForm>
