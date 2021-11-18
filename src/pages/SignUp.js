@@ -1,62 +1,121 @@
-import styled from 'styled-components';
-import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
-import womanMeditating from '../assets/images/initial-background.png';
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  StyledPageContainer,
+  StyledForm,
+  StyledInput,
+  StyledFormMessage,
+} from '../assets/styles/SignStyle';
 import { StyledButton, StyledLinkButton } from '../assets/styles/ButtonStyle';
+import { StyledGreetings } from '../assets/styles/SharedStyle';
+import signUp from '../services/api';
 
 export default function SignUp() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirmation, setPasswordConfirmation] = useState('');
+  const [loading, setLoading] = useState(false);
+  const passwordRules = 'Sua senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minúscula e 1 caractere especial';
+  const [message, setMessage] = useState(passwordRules);
+  const passwordRegex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
+  const [isSignUpSucess, setIsSignUpSucess] = useState(false);
+
+  const validateRepeatedPassword = () => {
+    if (password !== passwordConfirmation) {
+      setLoading(false);
+      setMessage('Sua confirmação de senha está errada!');
+      setTimeout(() => setMessage(passwordRules), 6000);
+      return false;
+    }
+    return true;
+  };
+
+  function signUpRequest(event) {
+    event.preventDefault();
+    setLoading(true);
+
+    const isRepeatedPasswordValid = validateRepeatedPassword();
+    if (!isRepeatedPasswordValid) return;
+
+    setIsSignUpSucess(true);
+    setMessage('Conta criada com sucesso!');
+    const signUpBody = {
+      name,
+      email,
+      password,
+    };
+    signUp(signUpBody)
+      .then(() => {
+        setLoading(false);
+        setIsSignUpSucess(true);
+        setMessage('Conta criada com sucesso!');
+        setTimeout(() => {
+          setMessage(passwordRules);
+          setIsSignUpSucess(false);
+        }, 10000);
+      })
+      .catch((err) => {
+        setMessage(err.response?.data);
+        setTimeout(() => setMessage(passwordRules), 6000);
+        setLoading(false);
+      });
+  }
+
   return (
-    <StyledFirstPageContainer>
-      <StyledGreetingsContainer>
-        <StyledGreetings>
-          Bem vindo ao GratiBox
-        </StyledGreetings>
-        <StyledSubGreetings>
-          Receba em casa um box com chás, produtos orgânicos, incensos e muito mais...
-        </StyledSubGreetings>
-      </StyledGreetingsContainer>
-      <StyledImg>
-        <img src={womanMeditating} alt="" />
-      </StyledImg>
-      <StyledButtonsBox>
-        <StyledButton>Quero começar</StyledButton>
-        <StyledLinkButton>Já sou grato</StyledLinkButton>
-      </StyledButtonsBox>
-    </StyledFirstPageContainer>
+    <StyledPageContainer>
+      <StyledGreetings>
+        Bem vindo ao GratiBox
+      </StyledGreetings>
+      <StyledForm onSubmit={(e) => signUpRequest(e)}>
+        <StyledInput
+          placeholder="Nome"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          minLength="1"
+          maxLength="30"
+          required
+          disabled={loading}
+        />
+        <StyledInput
+          placeholder="E-mail"
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          maxLength="100"
+          required
+          disabled={loading}
+        />
+        <StyledInput
+          placeholder="Senha"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          pattern={passwordRegex}
+          required
+          disabled={loading}
+        />
+        <StyledInput
+          placeholder="Confirme a senha"
+          type="password"
+          value={passwordConfirmation}
+          onChange={(e) => setPasswordConfirmation(e.target.value)}
+          required
+          disabled={loading}
+        />
+        <StyledFormMessage isSignUpSucess={isSignUpSucess}>{message}</StyledFormMessage>
+        <StyledButton type="submit" loading={loading} disabled={loading}>
+          {loading ? 'Carregando...' : 'Cadastrar'}
+        </StyledButton>
+        <StyledLinkButton>
+          <Link to="/sign-in" className="swapLink">
+            Logar
+          </Link>
+        </StyledLinkButton>
+      </StyledForm>
+
+    </StyledPageContainer>
   );
 }
-const StyledFirstPageContainer = styled.div`
-  background-color: #4D65A8;
-  height: 100vh;
-`;
-const StyledGreetingsContainer = styled.div`
-  background-color: #6D7CE4;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 35px;
-  padding: 50px 25px 35px;
-`;
-const StyledImg = styled.div`
-  margin-bottom: -3px;
-  img {
-    width: 100%;
-  }
-  @media (min-width: 900px) {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    img {
-      width: 400px;
-    }
-  }
-`;
-const StyledButtonsBox = styled.div`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px;
-  margin-bottom: 50px;
-`;
