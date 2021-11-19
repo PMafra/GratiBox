@@ -13,6 +13,9 @@ const StyledSubGreetings = styled.h2`
     font-weight: 300;
     line-height: 21px;
     text-align: center;
+    i {
+        font-style: italic;
+    }
 `;
 
 export { StyledGreetings, StyledSubGreetings };

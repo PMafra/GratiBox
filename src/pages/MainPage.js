@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
 import styled from 'styled-components';
 import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
@@ -12,14 +13,16 @@ export default function Greetings() {
           Good to see you here, user
         </StyledGreetings>
         <StyledSubGreetings>
-          {false ? (
+          {true ? (
             'You haven`t signed a plan yet, how about starting now?'
           ) : (
-            '"Giving thanks is the art of attracting good things"'
+            <i>
+              "Giving thanks is the art of attracting good things"
+            </i>
           )}
         </StyledSubGreetings>
       </StyledTopContainer>
-      {false ? (
+      {true ? (
         <PlansOptions />
       ) : (
         <AccountDetails />
