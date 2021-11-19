@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
@@ -12,7 +14,13 @@ export default function Greetings() {
   const [userPlanInfo, setUserPlanInfo] = useState('');
 
   const requestUserPlan = () => {
-    getUserPlan()
+    const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
+    if (!userSession) {
+      return;
+    }
+    const token = userSession.token;
+
+    getUserPlan(token)
       .then((res) => {
         setUserPlanInfo(res.data);
       })
