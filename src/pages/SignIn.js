@@ -116,6 +116,7 @@ const DirectLoginBox = styled.div`
     padding: 15px 20px;
     margin-top: 40px;
     gap: 15px;
+    border-radius: 15px;
 `;
 const DirectLoginButton = styled.button`
     width: 100px;
@@ -143,4 +144,5 @@ const DirectLoginAsk = styled.p`
     font-size: 16px;
     line-height: 20px;
     text-align: center;
+    word-break: break-all;
 `;

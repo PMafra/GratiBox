@@ -38,7 +38,6 @@ const StyledPlanOptionContainer = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    opacity: 10px;
 
     img {
         width: 100%;
@@ -49,7 +48,7 @@ const StyledPlanOptionContainer = styled.div`
     p {
         position: absolute;
         text-align: center;
-        top: 80px;
+        top: 70px;
         font-weight: 700;
         color: #ffffff;
         font-size: 19px;

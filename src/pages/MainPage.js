@@ -12,10 +12,14 @@ export default function Greetings() {
           Good to see you here, user
         </StyledGreetings>
         <StyledSubGreetings>
-          Você ainda não assinou um plano, que tal começar agora?
+          {false ? (
+            'You haven`t signed a plan yet, how about starting now?'
+          ) : (
+            '"Giving thanks is the art of attracting good things"'
+          )}
         </StyledSubGreetings>
       </StyledTopContainer>
-      {true ? (
+      {false ? (
         <PlansOptions />
       ) : (
         <AccountDetails />
