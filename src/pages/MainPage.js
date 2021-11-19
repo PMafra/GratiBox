@@ -1,11 +1,30 @@
+/* eslint-disable no-console */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
 import PlansOptions from '../components/PlansOptions';
 import AccountDetails from '../components/AccountDetails';
+import { getUserPlan } from '../services/api';
 
 export default function Greetings() {
+  const [userPlanInfo, setUserPlanInfo] = useState('');
+
+  const requestUserPlan = () => {
+    getUserPlan()
+      .then((res) => {
+        setUserPlanInfo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    requestUserPlan();
+  }, []);
+
   return (
     <StyledMainPageContainer>
       <StyledTopContainer>
@@ -13,7 +32,7 @@ export default function Greetings() {
           Good to see you here, user
         </StyledGreetings>
         <StyledSubGreetings>
-          {true ? (
+          {userPlanInfo === '' ? (
             'You haven`t signed a plan yet, how about starting now?'
           ) : (
             <i>
@@ -22,10 +41,10 @@ export default function Greetings() {
           )}
         </StyledSubGreetings>
       </StyledTopContainer>
-      {true ? (
+      {userPlanInfo === '' ? (
         <PlansOptions />
       ) : (
-        <AccountDetails />
+        <AccountDetails userPlanInfo={userPlanInfo} />
       )}
     </StyledMainPageContainer>
   );

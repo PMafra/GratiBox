@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import womanAndPlants from '../assets/images/plan-option-background.png';
 import womanAndPlants2 from '../assets/images/plan-option2.png';
@@ -10,18 +11,18 @@ export default function PlansOptions() {
         <p>
           You receive one box per week. Ideal for anyone who wants to exercise gratitude every day.
         </p>
-        <span>
+        <Link to="/subscribe" state={{ plan: 'weekly' }} className="subscribe-plan">
           Subscribe
-        </span>
+        </Link>
       </StyledPlanOptionContainer>
       <StyledPlanOptionContainer>
         <img src={womanAndPlants2} alt="" />
         <p>
           You receive one box per month. Ideal for those just starting out.
         </p>
-        <span>
+        <Link to="/subscribe" state={{ plan: 'monthly' }} className="subscribe-plan">
           Subscribe
-        </span>
+        </Link>
       </StyledPlanOptionContainer>
     </StyledPlansContainer>
   );
@@ -54,7 +55,7 @@ const StyledPlanOptionContainer = styled.div`
         font-size: 19px;
         margin: 0 30px;
     }
-    span {
+    .subscribe-plan {
         border: none;
         position: absolute;
         font-weight: 700;

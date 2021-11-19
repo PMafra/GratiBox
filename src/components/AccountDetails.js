@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import { StyledButton } from '../assets/styles/ButtonStyle';
 
-export default function AccountDetails() {
+export default function AccountDetails({ userPlanInfo }) {
   return (
     <StyledAccountDetailsContainer>
       <StyledImgContainer>
@@ -11,11 +12,11 @@ export default function AccountDetails() {
       <StyledPlanInfoBox>
         <span className="line-container">
           <h2>Plan</h2>
-          <p>PlanType</p>
+          <p>{userPlanInfo.type}</p>
         </span>
         <span className="line-container">
           <h2>Subscription date</h2>
-          <p>date</p>
+          <p>{userPlanInfo.date}</p>
         </span>
         <span className="line-container">
           <h2>Next deliveries</h2>
@@ -28,9 +29,7 @@ export default function AccountDetails() {
         <span className="line-container">
           <h2>Products</h2>
           <ul className="items-box">
-            <li>product</li>
-            <li>product</li>
-            <li>product</li>
+            {userPlanInfo.products?.map((product) => <li>{product}</li>)}
           </ul>
         </span>
         <ButtonContainer>
