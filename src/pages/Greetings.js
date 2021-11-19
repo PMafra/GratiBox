@@ -2,27 +2,31 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
 import womanMeditating from '../assets/images/initial-background.png';
-import { StyledButton, StyledLinkButton } from '../assets/styles/ButtonStyle';
+import { StyledLinkButton } from '../assets/styles/ButtonStyle';
 
 export default function Greetings() {
   return (
     <StyledFirstPageContainer>
       <StyledGreetingsContainer>
         <StyledGreetings>
-          Bem vindo ao GratiBox
+          Welcome to GratiBox
         </StyledGreetings>
         <StyledSubGreetings>
-          Receba em casa um box com chás, produtos orgânicos, incensos e muito mais...
+          Receive a box with teas, organic products, incense and much more at home...
         </StyledSubGreetings>
       </StyledGreetingsContainer>
       <StyledImg>
         <img src={womanMeditating} alt="" />
       </StyledImg>
       <StyledButtonsBox>
-        <StyledButton>Quero começar</StyledButton>
+        <StyledFirstPageButton>
+          <Link to="/sign-up" className="link">
+            I want to be grateful
+          </Link>
+        </StyledFirstPageButton>
         <StyledLinkButton>
           <Link to="/sign-in" className="swapLink">
-            Já sou grato
+            I`m already grateful
           </Link>
         </StyledLinkButton>
       </StyledButtonsBox>
@@ -64,4 +68,23 @@ const StyledButtonsBox = styled.div`
   flex-direction: column;
   gap: 20px;
   margin-bottom: 50px;
+`;
+const StyledFirstPageButton = styled.button`
+    background-color:#4D65A8;
+    border: none;
+    border-right: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    width: 270px;
+    height: 55px;
+    :active {
+        border: none;
+        border-top: 2px solid #ffffff;
+        border-bottom: 2px solid #ffffff;
+    }
+    .link {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 21px;
+      padding: 15px 30px;
+    }
 `;

@@ -11,7 +11,7 @@ export default function AppRoutes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="fade-drop" key={location.key}>
         <Switch location={location}>
-          <Route exact path="/" component={Greetings} />
+          <Route exact path="/welcome" component={Greetings} />
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/sign-in" component={SignIn} />
         </Switch>

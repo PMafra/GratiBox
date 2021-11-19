@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 
-const API_URL = 'https://localhost:3000';
+const API_URL = 'http://localhost:4000';
 
 const createHeaders = (token) => ({
   headers: {

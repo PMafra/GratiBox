@@ -13,10 +13,11 @@ import { signUp } from '../services/api';
 export default function SignUp() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [cpf, setCpf] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
   const [loading, setLoading] = useState(false);
-  const passwordRules = 'Sua senha deve conter pelo menos 8 caracteres, 1 letra maiúscula, 1 minúscula e 1 caractere especial';
+  const passwordRules = 'Your password must contain at least 8 characters, 1 upper case letter, 1 lower case letter, 1 number and 1 special character.';
   const [message, setMessage] = useState(passwordRules);
   const passwordRegex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   const [isSignUpSucess, setIsSignUpSucess] = useState(false);
@@ -41,6 +42,7 @@ export default function SignUp() {
     const signUpBody = {
       name,
       email,
+      cpf,
       password,
     };
     signUp(signUpBody)
@@ -63,11 +65,11 @@ export default function SignUp() {
   return (
     <StyledPageContainer>
       <StyledGreetings>
-        Bem vindo ao GratiBox
+        Welcome to GratiBox
       </StyledGreetings>
       <StyledForm onSubmit={(e) => signUpRequest(e)}>
         <StyledInput
-          placeholder="Nome"
+          placeholder="Name"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -86,7 +88,17 @@ export default function SignUp() {
           disabled={loading}
         />
         <StyledInput
-          placeholder="Senha"
+          placeholder="CPF"
+          type="text"
+          value={cpf}
+          onChange={(e) => setCpf(e.target.value)}
+          maxLength="11"
+          minLength="11"
+          required
+          disabled={loading}
+        />
+        <StyledInput
+          placeholder="Password"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
@@ -95,7 +107,7 @@ export default function SignUp() {
           disabled={loading}
         />
         <StyledInput
-          placeholder="Confirme a senha"
+          placeholder="Password confirmation"
           type="password"
           value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
@@ -104,11 +116,11 @@ export default function SignUp() {
         />
         <StyledFormMessage isSignUpSucess={isSignUpSucess}>{message}</StyledFormMessage>
         <StyledButton type="submit" loading={loading} disabled={loading}>
-          {loading ? 'Carregando...' : 'Cadastrar'}
+          {loading ? 'Loading...' : 'Sign-up'}
         </StyledButton>
         <StyledLinkButton>
           <Link to="/sign-in" className="swapLink">
-            Já é grato? Faça login!
+            Already grateful? Log-in!
           </Link>
         </StyledLinkButton>
       </StyledForm>
