@@ -22,7 +22,11 @@ export default function Greetings() {
 
     getUserPlan(token)
       .then((res) => {
+        if (res.status === 204) {
+          return;
+        }
         setUserPlanInfo(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);

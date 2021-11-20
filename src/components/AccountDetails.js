@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
@@ -12,11 +13,17 @@ export default function AccountDetails({ userPlanInfo }) {
       <StyledPlanInfoBox>
         <span className="line-container">
           <h2>Plan</h2>
-          <p>{userPlanInfo.type}</p>
+          <p>
+            {userPlanInfo.planType === 'Weekly' ? (
+              `Weekly - every ${userPlanInfo.planDay}`
+            ) : (
+              `Monthly - every day ${userPlanInfo.planDay}`
+            )}
+          </p>
         </span>
         <span className="line-container">
           <h2>Subscription date</h2>
-          <p>{userPlanInfo.date}</p>
+          <p>{userPlanInfo.signatureDate.split('T')[0]}</p>
         </span>
         <span className="line-container">
           <h2>Next deliveries</h2>
@@ -29,7 +36,7 @@ export default function AccountDetails({ userPlanInfo }) {
         <span className="line-container">
           <h2>Products</h2>
           <ul className="items-box">
-            {userPlanInfo.products?.map((product) => <li>{product}</li>)}
+            {userPlanInfo.userProducts.map((product) => <li>{product.name}</li>)}
           </ul>
         </span>
         <ButtonContainer>
@@ -81,6 +88,9 @@ const StyledPlanInfoBox = styled.div`
       padding: 10px 0;
       h2 {
         font-weight: 700;
+      }
+      li {
+        text-align: right;
       }
     }
     .items-box {
