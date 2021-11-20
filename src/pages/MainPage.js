@@ -10,7 +10,7 @@ import PlansOptions from '../components/PlansOptions';
 import AccountDetails from '../components/AccountDetails';
 import { getUserPlan } from '../services/api';
 
-export default function Greetings() {
+export default function MainPage() {
   const [userPlanInfo, setUserPlanInfo] = useState('');
 
   const requestUserPlan = () => {
