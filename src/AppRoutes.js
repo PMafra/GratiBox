@@ -3,6 +3,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Greetings from './pages/Greetings';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
+import MainPage from './pages/MainPage';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -11,9 +12,10 @@ export default function AppRoutes() {
     <TransitionGroup>
       <CSSTransition timeout={300} classNames="fade-drop" key={location.key}>
         <Switch location={location}>
-          <Route exact path="/" component={Greetings} />
+          <Route exact path="/welcome" component={Greetings} />
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/sign-in" component={SignIn} />
+          <Route exact path="/" component={MainPage} />
         </Switch>
       </CSSTransition>
     </TransitionGroup>
