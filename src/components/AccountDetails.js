@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 import {
-  nextMonday, nextWednesday, nextFriday, format, addDays,
+  nextMonday, nextWednesday, nextFriday, format, addDays, addMonths,
 } from 'date-fns';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -11,7 +11,7 @@ import { StyledButton } from '../assets/styles/ButtonStyle';
 export default function AccountDetails({ userPlanInfo }) {
   const [nextDates, setNextDates] = useState([]);
 
-  const calculateNextDeliveryDates = () => {
+  const calculateNextWeeklyDeliveries = () => {
     const initialDate = new Date(userPlanInfo.signatureDate);
     let nextDate1;
 
@@ -33,8 +33,49 @@ export default function AccountDetails({ userPlanInfo }) {
     setNextDates([formatedNextDate1, formatedNextDate2, formatedNextDate3]);
   };
 
+  function getNextWeekday(date) {
+    const tomorrow = new Date(date.setDate(date.getDate() + 1));
+    return tomorrow.getDay() % 6
+      ? (tomorrow)
+      : (getNextWeekday(tomorrow));
+  }
+
+  const calculateNextMonthDeliveries = () => {
+    const initialDate = new Date(userPlanInfo.signatureDate);
+
+    if (userPlanInfo.planDay === '1') {
+      initialDate.setMonth(initialDate.getMonth() + 1, 1);
+    }
+    if (userPlanInfo.planDay === '10') {
+      initialDate.setMonth(initialDate.getMonth() + 1, 10);
+    }
+    if (userPlanInfo.planDay === '20') {
+      initialDate.setMonth(initialDate.getMonth() + 1, 20);
+    }
+    const nextDate1 = initialDate;
+    const nextDate2 = addMonths(nextDate1, 1);
+    const nextDate3 = addMonths(nextDate2, 1);
+    const formatedNextDate1 = format(new Date(Date.parse(nextDate1)), 'yyyy-MM-dd');
+    const formatedNextDate2 = format(new Date(Date.parse(nextDate2)), 'yyyy-MM-dd');
+    const formatedNextDate3 = format(new Date(Date.parse(nextDate3)), 'yyyy-MM-dd');
+
+    const validDate1 = getNextWeekday(new Date(formatedNextDate1));
+    const validDate2 = getNextWeekday(new Date(formatedNextDate2));
+    const validDate3 = getNextWeekday(new Date(formatedNextDate3));
+
+    const formatedValidDate1 = format(new Date(Date.parse(validDate1)), 'yyyy-MM-dd');
+    const formatedValidDate2 = format(new Date(Date.parse(validDate2)), 'yyyy-MM-dd');
+    const formatedValidDate3 = format(new Date(Date.parse(validDate3)), 'yyyy-MM-dd');
+
+    setNextDates([formatedValidDate1, formatedValidDate2, formatedValidDate3]);
+  };
+
   useEffect(() => {
-    calculateNextDeliveryDates();
+    if (userPlanInfo.planType === 'Weekly') {
+      calculateNextWeeklyDeliveries();
+    } else {
+      calculateNextMonthDeliveries();
+    }
   }, []);
 
   return (
