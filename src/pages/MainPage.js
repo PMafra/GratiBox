@@ -4,8 +4,9 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
 import { useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
-import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
+import {
+  StyledGreetings, StyledSubGreetings, StyledPageContainer, StyledTopContainer,
+} from '../assets/styles/SharedStyle';
 import PlansOptions from '../components/PlansOptions';
 import AccountDetails from '../components/AccountDetails';
 import { getUserPlan } from '../services/api';
@@ -41,7 +42,7 @@ export default function MainPage() {
   }, []);
 
   return (
-    <StyledMainPageContainer>
+    <StyledPageContainer>
       <StyledTopContainer>
         <StyledGreetings>
           {`Good to see you here, ${userName}`}
@@ -61,18 +62,6 @@ export default function MainPage() {
       ) : (
         <AccountDetails userPlanInfo={userPlanInfo} />
       )}
-    </StyledMainPageContainer>
+    </StyledPageContainer>
   );
 }
-
-const StyledMainPageContainer = styled.div`
-  height:100%;
-  padding: 0px 25px;
-`;
-const StyledTopContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 25px;
-  margin-top: 60px;
-`;

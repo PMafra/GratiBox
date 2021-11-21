@@ -4,6 +4,7 @@ import Greetings from './pages/Greetings';
 import SignUp from './pages/SignUp';
 import SignIn from './pages/SignIn';
 import MainPage from './pages/MainPage';
+import Subscription from './pages/Subscription';
 
 export default function AppRoutes() {
   const location = useLocation();
@@ -16,6 +17,7 @@ export default function AppRoutes() {
           <Route exact path="/sign-up" component={SignUp} />
           <Route exact path="/sign-in" component={SignIn} />
           <Route exact path="/" component={MainPage} />
+          <Route exact path="/subscribe" component={Subscription} />
         </Switch>
       </CSSTransition>
     </TransitionGroup>

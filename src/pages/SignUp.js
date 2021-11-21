@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  StyledPageContainer,
+  StyledSignContainer,
   StyledForm,
   StyledInput,
   StyledFormMessage,
@@ -63,7 +63,7 @@ export default function SignUp() {
   }
 
   return (
-    <StyledPageContainer>
+    <StyledSignContainer>
       <StyledGreetings>
         Welcome to GratiBox
       </StyledGreetings>
@@ -125,6 +125,6 @@ export default function SignUp() {
         </StyledLinkButton>
       </StyledForm>
 
-    </StyledPageContainer>
+    </StyledSignContainer>
   );
 }
