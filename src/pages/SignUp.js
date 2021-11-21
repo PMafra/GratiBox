@@ -21,6 +21,7 @@ export default function SignUp() {
   const [message, setMessage] = useState(passwordRules);
   const passwordRegex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   const [isSignUpSucess, setIsSignUpSucess] = useState(false);
+  const stringWithOnlyNumbers = '^[0-9]+$';
 
   const validateRepeatedPassword = () => {
     if (password !== passwordConfirmation) {
@@ -95,6 +96,7 @@ export default function SignUp() {
           maxLength="11"
           minLength="11"
           required
+          pattern={stringWithOnlyNumbers}
           disabled={loading}
         />
         <StyledInput

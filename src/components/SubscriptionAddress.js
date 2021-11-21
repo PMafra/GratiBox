@@ -1,7 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
+import cep from 'cep-promise';
+import { IoSearchCircleOutline as SearchIcon } from 'react-icons/io5';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { StyledButton } from '../assets/styles/ButtonStyle';
@@ -10,26 +13,66 @@ import {
   StyledInput,
   StyledFormMessage,
 } from '../assets/styles/SignStyle';
+import { addUserPlan } from '../services/api';
 
-export default function SubscriptionPlan() {
+export default function SubscriptionPlan({ allUserPlanInfo }) {
   const [fullName, setFullName] = useState('');
-  const [cep, setCep] = useState('');
-  const [number, setNumber] = useState('');
   const [address, setAddress] = useState('');
+  const [userCep, setUserCep] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
   const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState('oi');
+  const initialMessage = 'Please, type your address information!';
+  const [message, setMessage] = useState(initialMessage);
+  const stringWithOnlyNumbers = '^[0-9]+$';
 
-  const addPlanRequest = () => {
-    console.log('oi');
-    setLoading(false);
-    setMessage('to');
+  const addPlanRequest = (event) => {
+    event.preventDefault();
+
+    const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
+    if (!userSession) {
+      return;
+    }
+
+    setLoading(true);
+    const { token } = userSession;
+    const addPlanBody = {
+      planType: allUserPlanInfo.planType,
+      planDay: allUserPlanInfo.planDay,
+      products: allUserPlanInfo.products,
+    };
+
+    addUserPlan(addPlanBody, token)
+      .then((res) => {
+        console.log(res.data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setMessage(err.response?.data);
+        setTimeout(() => setMessage(initialMessage), 6000);
+        setLoading(false);
+      });
+  };
+
+  const findUserAdressByCep = () => {
+    if (userCep.length === 8) {
+      cep(userCep)
+        .then((res) => {
+          setCity(res.city);
+          setState(res.state);
+          setAddress(`${res.neighborhood}, ${res.street.split('-')[0]}`);
+        })
+        .catch(() => {
+          setMessage('It wasn`t possible to consult the server! Please make sure you typed the CEP code correctly.');
+          setTimeout(() => setMessage(initialMessage), 6000);
+        });
+    }
   };
 
   return (
     <StyledInfoBox>
       <StyledForm onSubmit={(e) => addPlanRequest(e)}>
         <StyledInput
-          className="address-input"
           placeholder="Full name"
           type="text"
           value={fullName}
@@ -39,26 +82,40 @@ export default function SubscriptionPlan() {
           disabled={loading}
         />
         <StyledInput
-          placeholder="CEP"
-          type="text"
-          value={cep}
-          onChange={(e) => setCep(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <StyledInput
-          placeholder="Number"
-          type="text"
-          value={number}
-          onChange={(e) => setNumber(e.target.value)}
-          required
-          disabled={loading}
-        />
-        <StyledInput
           placeholder="Address"
           type="text"
           value={address}
           onChange={(e) => setAddress(e.target.value)}
+          required
+          disabled={loading}
+        />
+        <StyledCepInputContainer>
+          <StyledInput
+            placeholder="CEP"
+            type="text"
+            value={userCep}
+            onChange={(e) => setUserCep(e.target.value)}
+            minLength="8"
+            maxLength="8"
+            required
+            pattern={stringWithOnlyNumbers}
+            disabled={loading}
+          />
+          <SearchIcon className="check-cep" onClick={() => findUserAdressByCep()} />
+        </StyledCepInputContainer>
+        <StyledInput
+          placeholder="City"
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          required
+          disabled={loading}
+        />
+        <StyledInput
+          placeholder="State"
+          type="text"
+          value={state}
+          onChange={(e) => setState(e.target.value)}
           required
           disabled={loading}
         />
@@ -95,4 +152,14 @@ const StyledInfoBox = styled.div`
         cursor: pointer;
       }
     }
+`;
+const StyledCepInputContainer = styled.div`
+  width: 100%;
+  display: flex;
+  .check-cep {
+    height: 35px;
+    width: 35px;
+    background-color: #6D7CE4;
+    border-bottom: 2px solid #ffffff;
+  }
 `;
