@@ -1,10 +1,42 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
+import {
+  nextMonday, nextWednesday, nextFriday, format, addDays,
+} from 'date-fns';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import { StyledButton } from '../assets/styles/ButtonStyle';
 
 export default function AccountDetails({ userPlanInfo }) {
+  const [nextDates, setNextDates] = useState([]);
+
+  const calculateNextDeliveryDates = () => {
+    const initialDate = new Date(userPlanInfo.signatureDate);
+    let nextDate1;
+
+    if (userPlanInfo.planDay === 'Monday') {
+      nextDate1 = nextMonday(initialDate);
+    }
+    if (userPlanInfo.planDay === 'Wednesday') {
+      nextDate1 = nextWednesday(initialDate);
+    }
+    if (userPlanInfo.planDay === 'Friday') {
+      nextDate1 = nextFriday(initialDate);
+    }
+    const nextDate2 = addDays(nextDate1, 7);
+    const nextDate3 = addDays(nextDate2, 7);
+    const formatedNextDate1 = format(new Date(Date.parse(nextDate1)), 'yyyy-MM-dd');
+    const formatedNextDate2 = format(new Date(Date.parse(nextDate2)), 'yyyy-MM-dd');
+    const formatedNextDate3 = format(new Date(Date.parse(nextDate3)), 'yyyy-MM-dd');
+
+    setNextDates([formatedNextDate1, formatedNextDate2, formatedNextDate3]);
+  };
+
+  useEffect(() => {
+    calculateNextDeliveryDates();
+  }, []);
+
   return (
     <StyledAccountDetailsContainer>
       <StyledImgContainer>
@@ -28,9 +60,7 @@ export default function AccountDetails({ userPlanInfo }) {
         <span className="line-container">
           <h2>Next deliveries</h2>
           <ul className="items-box">
-            <li>dates</li>
-            <li>dates</li>
-            <li>dates</li>
+            {nextDates.map((date) => <li>{date}</li>)}
           </ul>
         </span>
         <span className="line-container">

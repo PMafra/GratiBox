@@ -3,22 +3,25 @@
 /* eslint-disable no-console */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
 import PlansOptions from '../components/PlansOptions';
 import AccountDetails from '../components/AccountDetails';
 import { getUserPlan } from '../services/api';
+import UserContext from '../store/UserContext';
 
 export default function MainPage() {
   const [userPlanInfo, setUserPlanInfo] = useState('');
+  const { userName, setUserName } = useContext(UserContext);
 
   const requestUserPlan = () => {
     const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
     if (!userSession) {
       return;
     }
-    const token = userSession.token;
+    const { token, name } = userSession;
+    setUserName(name);
 
     getUserPlan(token)
       .then((res) => {
@@ -41,7 +44,7 @@ export default function MainPage() {
     <StyledMainPageContainer>
       <StyledTopContainer>
         <StyledGreetings>
-          Good to see you here, user
+          {`Good to see you here, ${userName}`}
         </StyledGreetings>
         <StyledSubGreetings>
           {userPlanInfo === '' ? (
