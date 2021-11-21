@@ -59,15 +59,15 @@ export default function AccountDetails({ userPlanInfo }) {
     const formatedNextDate2 = format(new Date(Date.parse(nextDate2)), 'yyyy-MM-dd');
     const formatedNextDate3 = format(new Date(Date.parse(nextDate3)), 'yyyy-MM-dd');
 
-    const validDate1 = getNextWeekday(new Date(formatedNextDate1));
-    const validDate2 = getNextWeekday(new Date(formatedNextDate2));
-    const validDate3 = getNextWeekday(new Date(formatedNextDate3));
+    const businessDate1 = getNextWeekday(new Date(formatedNextDate1));
+    const businessDate2 = getNextWeekday(new Date(formatedNextDate2));
+    const businessDate3 = getNextWeekday(new Date(formatedNextDate3));
 
-    const formatedValidDate1 = format(new Date(Date.parse(validDate1)), 'yyyy-MM-dd');
-    const formatedValidDate2 = format(new Date(Date.parse(validDate2)), 'yyyy-MM-dd');
-    const formatedValidDate3 = format(new Date(Date.parse(validDate3)), 'yyyy-MM-dd');
+    const formatedBusinessDate1 = format(new Date(Date.parse(businessDate1)), 'yyyy-MM-dd');
+    const formatedBusinessDate2 = format(new Date(Date.parse(businessDate2)), 'yyyy-MM-dd');
+    const formatedBusinessDate3 = format(new Date(Date.parse(businessDate3)), 'yyyy-MM-dd');
 
-    setNextDates([formatedValidDate1, formatedValidDate2, formatedValidDate3]);
+    setNextDates([formatedBusinessDate1, formatedBusinessDate2, formatedBusinessDate3]);
   };
 
   useEffect(() => {
