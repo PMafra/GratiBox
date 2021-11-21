@@ -28,23 +28,32 @@ export default function SubscriptionPlan({ allUserPlanInfo }) {
 
   const addPlanRequest = (event) => {
     event.preventDefault();
-
     const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
     if (!userSession) {
       return;
     }
-
     setLoading(true);
     const { token } = userSession;
     const addPlanBody = {
-      planType: allUserPlanInfo.planType,
-      planDay: allUserPlanInfo.planDay,
-      products: allUserPlanInfo.products,
+      plan: {
+        planType: allUserPlanInfo.planType,
+        planDay: allUserPlanInfo.planDay,
+        products: allUserPlanInfo.products,
+      },
+      address: {
+        fullName,
+        cep: userCep,
+        address,
+        city,
+        state,
+      },
     };
 
     addUserPlan(addPlanBody, token)
       .then((res) => {
-        console.log(res.data);
+        console.log(res.status);
+        setMessage('Congratulations! Your plan subscription has been confirmed! We thruly hope you like it ;)');
+        setTimeout(() => setMessage(initialMessage), 6000);
         setLoading(false);
       })
       .catch((err) => {
@@ -81,14 +90,6 @@ export default function SubscriptionPlan({ allUserPlanInfo }) {
           required
           disabled={loading}
         />
-        <StyledInput
-          placeholder="Address"
-          type="text"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-          required
-          disabled={loading}
-        />
         <StyledCepInputContainer>
           <StyledInput
             placeholder="CEP"
@@ -103,6 +104,14 @@ export default function SubscriptionPlan({ allUserPlanInfo }) {
           />
           <SearchIcon className="check-cep" onClick={() => findUserAdressByCep()} />
         </StyledCepInputContainer>
+        <StyledInput
+          placeholder="Address"
+          type="text"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          required
+          disabled={loading}
+        />
         <StyledInput
           placeholder="City"
           type="text"

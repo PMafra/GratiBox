@@ -50,7 +50,7 @@ export default function SignUp() {
       .then(() => {
         setLoading(false);
         setIsSignUpSucess(true);
-        setMessage('Conta criada com sucesso!');
+        setMessage('Account created successfully!');
         setTimeout(() => {
           setMessage(passwordRules);
           setIsSignUpSucess(false);
