@@ -1,7 +1,16 @@
+/* eslint-disable no-console */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { IoArrowDownCircleSharp as BottomArrow, IoArrowUpCircleSharp as TopArrow } from 'react-icons/io5';
+import {
+  IoArrowDownCircleSharp as BottomArrow,
+  IoArrowUpCircleSharp as TopArrow,
+  IoRadioButtonOffSharp as NotMarked,
+  IoHeartCircleOutline as Marked,
+} from 'react-icons/io5';
 import { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import { StyledButton } from '../assets/styles/ButtonStyle';
@@ -17,7 +26,17 @@ export default function Subscription() {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [planType, setPlanType] = useState('');
   const [planDay, setPlanDay] = useState('');
-  const [planProducts, setPLanProducts] = useState('');
+  const [isTeas, setIsTeas] = useState(false);
+  const [isIncense, setIsIncense] = useState(false);
+  const [isOrganic, setIsOrganic] = useState(false);
+  const [subscriptionSection, setSubscriptionSection] = useState('plan');
+  const history = useHistory();
+
+  const goToAdressSection = () => {
+    if (planType !== '' && planDay !== '' && (isTeas === true || isIncense === true || isOrganic === true)) {
+      setSubscriptionSection('adress');
+    }
+  };
 
   return (
     <StyledPageContainer>
@@ -42,10 +61,20 @@ export default function Subscription() {
               <>
                 <TopArrow className="arrow-icon" onClick={() => setIsPlanOpen(false)} />
                 <DropDownBox>
-                  <span className="option">
+                  <span className="option" onClick={() => setPlanType('weekly')}>
+                    {planType === 'weekly' ? (
+                      <Marked className="heart-circle" />
+                    ) : (
+                      <NotMarked className="empty-circle" />
+                    )}
                     Weekly
                   </span>
-                  <span className="option">
+                  <span className="option" onClick={() => setPlanType('monthly')}>
+                    {planType === 'monthly' ? (
+                      <Marked className="heart-circle" />
+                    ) : (
+                      <NotMarked className="empty-circle" />
+                    )}
                     Monthly
                   </span>
                 </DropDownBox>
@@ -55,13 +84,66 @@ export default function Subscription() {
             )}
           </span>
           <span className="choices-container">
-            <h2>Delivery</h2>
+            <h2>Delivery day</h2>
             {isDeliveryOpen ? (
               <>
                 <TopArrow className="arrow-icon" onClick={() => setIsDeliveryOpen(false)} />
-                <DropDownBox>
-                  oi
-                </DropDownBox>
+                {planType === 'weekly' ? (
+                  <DropDownBox>
+                    <span className="option" onClick={() => setPlanDay('monday')}>
+                      {planDay === 'monday' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Monday
+                    </span>
+                    <span className="option" onClick={() => setPlanDay('wednesday')}>
+                      {planDay === 'wednesday' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Wednesday
+                    </span>
+                    <span className="option" onClick={() => setPlanDay('friday')}>
+                      {planDay === 'friday' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Friday
+                    </span>
+                  </DropDownBox>
+                ) : ('')}
+                {planType === 'monthly' ? (
+                  <DropDownBox>
+                    <span className="option" onClick={() => setPlanDay('1')}>
+                      {planDay === '1' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Day 01
+                    </span>
+                    <span className="option" onClick={() => setPlanDay('10')}>
+                      {planDay === '10' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Day 10
+                    </span>
+                    <span className="option" onClick={() => setPlanDay('20')}>
+                      {planDay === '20' ? (
+                        <Marked className="heart-circle" />
+                      ) : (
+                        <NotMarked className="empty-circle" />
+                      )}
+                      Day 20
+                    </span>
+                  </DropDownBox>
+                ) : ('')}
               </>
             ) : (
               <BottomArrow className="arrow-icon" onClick={() => setIsDeliveryOpen(true)} />
@@ -73,7 +155,30 @@ export default function Subscription() {
               <>
                 <TopArrow className="arrow-icon" onClick={() => setIsProductsOpen(false)} />
                 <DropDownBox>
-                  oi
+                  <span className="option" onClick={() => setIsTeas(!isTeas)}>
+                    {isTeas ? (
+                      <Marked className="heart-circle" />
+                    ) : (
+                      <NotMarked className="empty-circle" />
+                    )}
+                    Teas
+                  </span>
+                  <span className="option" onClick={() => setIsIncense(!isIncense)}>
+                    {isIncense ? (
+                      <Marked className="heart-circle" />
+                    ) : (
+                      <NotMarked className="empty-circle" />
+                    )}
+                    Insence
+                  </span>
+                  <span className="option" onClick={() => setIsOrganic(!isOrganic)}>
+                    {isOrganic ? (
+                      <Marked className="heart-circle" />
+                    ) : (
+                      <NotMarked className="empty-circle" />
+                    )}
+                    Organic Products
+                  </span>
                 </DropDownBox>
               </>
             ) : (
@@ -81,7 +186,7 @@ export default function Subscription() {
             )}
           </span>
           <ButtonContainer>
-            <StyledButton>
+            <StyledButton onClick={() => goToAdressSection()}>
               Next
             </StyledButton>
           </ButtonContainer>
@@ -150,16 +255,14 @@ const DropDownBox = styled.div`
     padding: 15px;
     display: flex;
     justify-content: center;
-    gap: 70px;
+    gap: 20px;
     z-index: 1;
     .option {
         display: flex;
         align-items: center;
-        gap: 10px;
-        opacity: 0.8;
         cursor: pointer;
-        :hover {
-            opacity: 100%;
+        .empty-circle, .heart-circle {
+            font-size: 25px;
         }
     }
 `;
