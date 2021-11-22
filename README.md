@@ -20,10 +20,6 @@
 * [Styled-components](https://styled-components.com/)
 * [React Router](https://v5.reactrouter.com/web/guides/quick-start)
 * [Axios](https://axios-http.com/docs/intro)
-* [Nodejs](https://nodejs.org/en/)
-* [Express](https://expressjs.com/)
-* [PostgreSQL](https://www.postgresql.org/)
-* [Jest](https://jestjs.io/)
 * [Cypress](https://www.cypress.io/)
 
 <!-- GETTING STARTED -->
