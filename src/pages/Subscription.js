@@ -7,7 +7,7 @@
 import {
   useContext, useState, useEffect,
 } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import {
@@ -17,6 +17,7 @@ import UserContext from '../store/UserContext';
 import SubscriptionPlan from '../components/SubscriptionPlan';
 import SubscriptionAdress from '../components/SubscriptionAddress';
 import { getUserPlan } from '../services/api';
+import { StyledButton } from '../assets/styles/ButtonStyle';
 
 export default function Subscription() {
   const {
@@ -68,6 +69,11 @@ export default function Subscription() {
             You've already signed up for a plan!
             Soon enough you will be able to change plan information or cancel it!
           </StyledNotAllowedMessage>
+          <StyledButton>
+            <Link to="/" className="link">
+              Back to main page
+            </Link>
+          </StyledButton>
         </StyledNotAllowedContainer>
       ) : (
         <StyledSubscriptionContainer>
@@ -91,17 +97,23 @@ export default function Subscription() {
 const StyledNotAllowedContainer = styled.div`
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
     margin: 40px 0;
     width: 100%;
     height: 450px;
+    gap: 80px;
+    .link {
+      color: #ffffff;
+      text-decoration: none;
+    }
 `;
 const StyledNotAllowedMessage = styled.p`
     font-size: 23px;
-    text-align: center;
-    margin-top: 100px;
     width: 260px;
     color: #ffffff;
     line-height: 28px;
+    text-align: center;
 `;
 const StyledSubscriptionContainer = styled.div`
     display: flex;
