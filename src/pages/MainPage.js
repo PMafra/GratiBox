@@ -40,7 +40,7 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    requestUserPlan();
+    setTimeout(() => requestUserPlan(), 700);
   }, []);
 
   return (
