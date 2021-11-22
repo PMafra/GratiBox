@@ -15,7 +15,7 @@ import {
 } from '../assets/styles/SignStyle';
 import { addUserPlan } from '../services/api';
 
-export default function SubscriptionPlan({ allUserPlanInfo }) {
+export default function SubscriptionPlan({ allnewPlanInfo }) {
   const [fullName, setFullName] = useState('');
   const [address, setAddress] = useState('');
   const [userCep, setUserCep] = useState('');
@@ -36,9 +36,9 @@ export default function SubscriptionPlan({ allUserPlanInfo }) {
     const { token } = userSession;
     const addPlanBody = {
       plan: {
-        planType: allUserPlanInfo.planType,
-        planDay: allUserPlanInfo.planDay,
-        products: allUserPlanInfo.products,
+        planType: allnewPlanInfo.planType,
+        planDay: allnewPlanInfo.planDay,
+        products: allnewPlanInfo.products,
       },
       address: {
         fullName,

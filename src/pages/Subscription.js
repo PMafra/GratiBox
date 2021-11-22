@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import {
@@ -12,11 +12,38 @@ import {
 import UserContext from '../store/UserContext';
 import SubscriptionPlan from '../components/SubscriptionPlan';
 import SubscriptionAdress from '../components/SubscriptionAddress';
+import { getUserPlan } from '../services/api';
 
 export default function Subscription() {
-  const { userName } = useContext(UserContext);
+  const {
+    userName, setUserName, userPlanInfo, setUserPlanInfo,
+  } = useContext(UserContext);
   const [subscriptionSection, setSubscriptionSection] = useState('plan');
-  const [allUserPlanInfo, setAllUserPlanInfo] = useState('');
+  const [allnewPlanInfo, setAllnewPlanInfo] = useState('');
+
+  const requestUserPlan = () => {
+    const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
+    if (!userSession) {
+      return;
+    }
+    const { token, name } = userSession;
+    setUserName(name);
+
+    getUserPlan(token)
+      .then((res) => {
+        if (res.status === 204) {
+          return;
+        }
+        setUserPlanInfo(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    requestUserPlan();
+  }, []);
 
   return (
     <StyledPageContainer>
@@ -30,23 +57,47 @@ export default function Subscription() {
           </i>
         </StyledSubGreetings>
       </StyledTopContainer>
-      <StyledSubscriptionContainer>
-        <StyledImgContainer>
-          <img src={womanAndPlant} alt="" />
-        </StyledImgContainer>
-        {subscriptionSection === 'plan' ? (
-          <SubscriptionPlan
-            setSubscriptionSection={setSubscriptionSection}
-            setAllUserPlanInfo={setAllUserPlanInfo}
-          />
-        ) : (
-          <SubscriptionAdress allUserPlanInfo={allUserPlanInfo} />
-        )}
-      </StyledSubscriptionContainer>
+      {userPlanInfo !== '' ? (
+        <StyledNotAllowedContainer>
+          <StyledNotAllowedMessage>
+            You've already signed up for a plan!
+            Soon enough you will be able to change plan information or cancel it!
+          </StyledNotAllowedMessage>
+        </StyledNotAllowedContainer>
+      ) : (
+        <StyledSubscriptionContainer>
+          <StyledImgContainer>
+            <img src={womanAndPlant} alt="" />
+          </StyledImgContainer>
+          {subscriptionSection === 'plan' ? (
+            <SubscriptionPlan
+              setSubscriptionSection={setSubscriptionSection}
+              setAllnewPlanInfo={setAllnewPlanInfo}
+            />
+          ) : (
+            <SubscriptionAdress allnewPlanInfo={allnewPlanInfo} />
+          )}
+        </StyledSubscriptionContainer>
+      )}
     </StyledPageContainer>
   );
 }
 
+const StyledNotAllowedContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+    width: 100%;
+    height: 450px;
+`;
+const StyledNotAllowedMessage = styled.p`
+    font-size: 23px;
+    text-align: center;
+    margin-top: 100px;
+    width: 260px;
+    color: #ffffff;
+    line-height: 28px;
+`;
 const StyledSubscriptionContainer = styled.div`
     display: flex;
     flex-direction: column;

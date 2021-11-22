@@ -11,7 +11,7 @@ import {
 import styled from 'styled-components';
 import { StyledButton } from '../assets/styles/ButtonStyle';
 
-export default function SubscriptionPlan({ setSubscriptionSection, setAllUserPlanInfo }) {
+export default function SubscriptionPlan({ setSubscriptionSection, setAllnewPlanInfo }) {
   const [isPlanOpen, setIsPlanOpen] = useState(false);
   const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
   const [isProductsOpen, setIsProductsOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function SubscriptionPlan({ setSubscriptionSection, setAllUserPla
       if (isOrganic) {
         userProducts.push('organic products');
       }
-      setAllUserPlanInfo({
+      setAllnewPlanInfo({
         planType,
         planDay,
         products: userProducts,
