@@ -41,7 +41,7 @@ npm install npm@latest -g
 
 ### Installation
 
-1. Create a root project folder named campy
+1. Create a root project folder named gratibox
 ```sh
 mkdir gratibox
 ```
@@ -53,7 +53,7 @@ git clone https://github.com/PMafra/GratiBox_front.git
 ```sh
 npm install
 ```
-4. Clone the back-end repo as a sibling to the front-end (within the /campy folder)
+4. Clone the back-end repo as a sibling to the front-end (within the /gratibox folder)
 ```sh
 git clone https://github.com/PMafra/GratiBox_back.git
 ```
