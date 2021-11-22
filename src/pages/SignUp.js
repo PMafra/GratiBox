@@ -116,7 +116,7 @@ export default function SignUp() {
           required
           disabled={loading}
         />
-        <StyledFormMessage isSignUpSucess={isSignUpSucess}>{message}</StyledFormMessage>
+        <StyledFormMessage id="display-message" isSignUpSucess={isSignUpSucess}>{message}</StyledFormMessage>
         <StyledButton type="submit" loading={loading} disabled={loading}>
           {loading ? 'Loading...' : 'Sign-up'}
         </StyledButton>
