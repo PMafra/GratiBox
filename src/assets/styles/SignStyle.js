@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledPageContainer = styled.div`
+const StyledSignContainer = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -49,7 +49,7 @@ const StyledFormMessage = styled.span`
   margin-bottom: 60px;
 `;
 export {
-  StyledPageContainer,
+  StyledSignContainer,
   StyledForm,
   StyledInput,
   StyledFormMessage,

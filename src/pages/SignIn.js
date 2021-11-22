@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import {
-  StyledPageContainer,
+  StyledSignContainer,
   StyledForm,
   StyledInput,
   StyledFormMessage,
@@ -56,7 +56,7 @@ export default function SignUp() {
   }
 
   return (
-    <StyledPageContainer>
+    <StyledSignContainer>
       <StyledGreetings>
         Welcome to GratiBox
       </StyledGreetings>
@@ -101,7 +101,7 @@ export default function SignUp() {
           </DirectLoginButton>
         </DirectLoginBox>
       ) : ('')}
-    </StyledPageContainer>
+    </StyledSignContainer>
   );
 }
 

@@ -3,22 +3,26 @@
 /* eslint-disable no-console */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
-import { useEffect, useState, useContext } from 'react';
-import styled from 'styled-components';
-import { StyledGreetings, StyledSubGreetings } from '../assets/styles/SharedStyle';
+import { useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import {
+  StyledGreetings, StyledSubGreetings, StyledPageContainer, StyledTopContainer,
+} from '../assets/styles/SharedStyle';
 import PlansOptions from '../components/PlansOptions';
 import AccountDetails from '../components/AccountDetails';
 import { getUserPlan } from '../services/api';
 import UserContext from '../store/UserContext';
 
 export default function MainPage() {
-  const [userPlanInfo, setUserPlanInfo] = useState('');
-  const { userName, setUserName } = useContext(UserContext);
+  const {
+    userName, setUserName, userPlanInfo, setUserPlanInfo,
+  } = useContext(UserContext);
+  const history = useHistory();
 
   const requestUserPlan = () => {
     const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
     if (!userSession) {
-      return;
+      return history.push('/welcome');
     }
     const { token, name } = userSession;
     setUserName(name);
@@ -29,7 +33,6 @@ export default function MainPage() {
           return;
         }
         setUserPlanInfo(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -37,11 +40,11 @@ export default function MainPage() {
   };
 
   useEffect(() => {
-    requestUserPlan();
+    setTimeout(() => requestUserPlan(), 700);
   }, []);
 
   return (
-    <StyledMainPageContainer>
+    <StyledPageContainer>
       <StyledTopContainer>
         <StyledGreetings>
           {`Good to see you here, ${userName}`}
@@ -59,20 +62,8 @@ export default function MainPage() {
       {userPlanInfo === '' ? (
         <PlansOptions />
       ) : (
-        <AccountDetails userPlanInfo={userPlanInfo} />
+        <AccountDetails />
       )}
-    </StyledMainPageContainer>
+    </StyledPageContainer>
   );
 }
-
-const StyledMainPageContainer = styled.div`
-  height:100%;
-  padding: 0px 25px;
-`;
-const StyledTopContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 25px;
-  margin-top: 60px;
-`;

@@ -8,9 +8,13 @@ import UserContext from './store/UserContext';
 
 export default function App() {
   const [userName, setUserName] = useState('');
+  const [userPlanInfo, setUserPlanInfo] = useState('');
 
   return (
-    <UserContext.Provider value={{ userName, setUserName }}>
+    <UserContext.Provider value={{
+      userName, setUserName, userPlanInfo, setUserPlanInfo,
+    }}
+    >
       <Router>
         <GlobalStyle />
         <TransitionStyle />

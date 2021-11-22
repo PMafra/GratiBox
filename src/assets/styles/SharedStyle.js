@@ -17,5 +17,18 @@ const StyledSubGreetings = styled.h2`
         font-style: italic;
     }
 `;
+const StyledPageContainer = styled.div`
+  height:100%;
+  padding: 0px 25px;
+`;
+const StyledTopContainer = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 60px;
+`;
 
-export { StyledGreetings, StyledSubGreetings };
+export {
+  StyledGreetings, StyledSubGreetings, StyledPageContainer, StyledTopContainer,
+};

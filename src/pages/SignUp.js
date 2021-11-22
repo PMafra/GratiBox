@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  StyledPageContainer,
+  StyledSignContainer,
   StyledForm,
   StyledInput,
   StyledFormMessage,
@@ -21,6 +21,7 @@ export default function SignUp() {
   const [message, setMessage] = useState(passwordRules);
   const passwordRegex = '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$';
   const [isSignUpSucess, setIsSignUpSucess] = useState(false);
+  const stringWithOnlyNumbers = '^[0-9]+$';
 
   const validateRepeatedPassword = () => {
     if (password !== passwordConfirmation) {
@@ -49,7 +50,7 @@ export default function SignUp() {
       .then(() => {
         setLoading(false);
         setIsSignUpSucess(true);
-        setMessage('Conta criada com sucesso!');
+        setMessage('Account created successfully!');
         setTimeout(() => {
           setMessage(passwordRules);
           setIsSignUpSucess(false);
@@ -63,7 +64,7 @@ export default function SignUp() {
   }
 
   return (
-    <StyledPageContainer>
+    <StyledSignContainer>
       <StyledGreetings>
         Welcome to GratiBox
       </StyledGreetings>
@@ -95,6 +96,7 @@ export default function SignUp() {
           maxLength="11"
           minLength="11"
           required
+          pattern={stringWithOnlyNumbers}
           disabled={loading}
         />
         <StyledInput
@@ -125,6 +127,6 @@ export default function SignUp() {
         </StyledLinkButton>
       </StyledForm>
 
-    </StyledPageContainer>
+    </StyledSignContainer>
   );
 }

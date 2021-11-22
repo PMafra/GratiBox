@@ -3,13 +3,15 @@
 import {
   nextMonday, nextWednesday, nextFriday, format, addDays, addMonths,
 } from 'date-fns';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import { StyledButton } from '../assets/styles/ButtonStyle';
+import UserContext from '../store/UserContext';
 
-export default function AccountDetails({ userPlanInfo }) {
+export default function AccountDetails() {
   const [nextDates, setNextDates] = useState([]);
+  const { userPlanInfo } = useContext(UserContext);
 
   const calculateNextWeeklyDeliveries = () => {
     const initialDate = new Date(userPlanInfo.signatureDate);
