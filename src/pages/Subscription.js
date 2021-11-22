@@ -1,9 +1,13 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-console */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useContext, useState, useEffect } from 'react';
+import {
+  useContext, useState, useEffect,
+} from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import womanAndPlant from '../assets/images/details-background.png';
 import {
@@ -20,11 +24,12 @@ export default function Subscription() {
   } = useContext(UserContext);
   const [subscriptionSection, setSubscriptionSection] = useState('plan');
   const [allnewPlanInfo, setAllnewPlanInfo] = useState('');
+  const history = useHistory();
 
   const requestUserPlan = () => {
     const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
     if (!userSession) {
-      return;
+      return history.push('/welcome');
     }
     const { token, name } = userSession;
     setUserName(name);

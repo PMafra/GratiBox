@@ -11,7 +11,7 @@ export default function PlansOptions() {
         <p>
           You receive one box per week. Ideal for anyone who wants to exercise gratitude every day.
         </p>
-        <Link to="/subscribe" state={{ plan: 'weekly' }} className="subscribe-plan">
+        <Link to="/subscribe" className="subscribe-plan">
           Subscribe
         </Link>
       </StyledPlanOptionContainer>
@@ -20,7 +20,7 @@ export default function PlansOptions() {
         <p>
           You receive one box per month. Ideal for those just starting out.
         </p>
-        <Link to="/subscribe" state={{ plan: 'monthly' }} className="subscribe-plan">
+        <Link to="/subscribe" className="subscribe-plan">
           Subscribe
         </Link>
       </StyledPlanOptionContainer>

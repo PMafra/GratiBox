@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -214,7 +215,7 @@ const DropDownBox = styled.div`
     border-bottom-left-radius: 15px;
     width: 100%;
     position: absolute;
-    bottom: -48px;
+    bottom: -55px;
     color: #6D7CE4;
     font-weight: 700;
     padding: 15px;
@@ -222,6 +223,7 @@ const DropDownBox = styled.div`
     justify-content: center;
     gap: 20px;
     z-index: 1;
+    background-color: #ffffff;
     .option {
         display: flex;
         align-items: center;

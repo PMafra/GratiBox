@@ -4,6 +4,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-constant-condition */
 import { useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   StyledGreetings, StyledSubGreetings, StyledPageContainer, StyledTopContainer,
 } from '../assets/styles/SharedStyle';
@@ -16,11 +17,12 @@ export default function MainPage() {
   const {
     userName, setUserName, userPlanInfo, setUserPlanInfo,
   } = useContext(UserContext);
+  const history = useHistory();
 
   const requestUserPlan = () => {
     const userSession = JSON.parse(localStorage.getItem('gratiBoxSession'));
     if (!userSession) {
-      return;
+      return history.push('/welcome');
     }
     const { token, name } = userSession;
     setUserName(name);
