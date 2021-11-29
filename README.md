@@ -1,67 +1,99 @@
 # GratiBox
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-<!-- * [License](#license) -->
-* [Contact](#contact)
+Try it out now at https://grati-box-front-zeta.vercel.app/
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+<img width="350px" heigth="350px" src="./Gratibox.gif" />
 
-### Built With
+## About
 
-* [React.js](https://reactjs.org/)
-* [Styled-components](https://styled-components.com/)
-* [React Router](https://v5.reactrouter.com/web/guides/quick-start)
-* [Axios](https://axios-http.com/docs/intro)
-* [Cypress](https://www.cypress.io/)
+Below are the implemented features:
 
-<!-- GETTING STARTED -->
-## Getting Started
+- Sign-up
+- Login
+- List plan signature for a user
+- Add plan
 
-To get a local copy up and running follow these simple steps.
+## Technologies
+The following tools and frameworks were used in the construction of the project:<br>
+<p>
+  <img src="https://img.shields.io/badge/-Javascript-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-React-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-Styled_components-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-React_router-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-Axios-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-Cypress-purple?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/-Trello-purple?style=for-the-badge" />
+</p>
 
-### Prerequisites
+## How to run
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-```sh
-npm install npm@latest -g
+1. Create a root project folder named GratiBox
 ```
-
-### Installation
-
-1. Create a root project folder named gratibox
-```sh
-mkdir gratibox
+mkdir GratiBox
 ```
 2. Clone the front-end repo
-```sh
+```
 git clone https://github.com/PMafra/GratiBox_front.git
 ```
 3. Install NPM packages for the front-end repo
-```sh
+```
 npm install
 ```
-4. Clone the back-end repo as a sibling to the front-end (within the /gratibox folder)
-```sh
+4. Clone the back-end repo as a sibling to the front-end (within the /GratiBox folder)
+```
 git clone https://github.com/PMafra/GratiBox_back.git
 ```
 5. Install NPM packages for the back-end repo
-```sh
+```
 npm install
 ```
+6. Follow instructions to fully run back-end at https://github.com/PMafra/GratiBox_back
 
-<!-- USAGE EXAMPLES -->
-## Usage
+7. To run in test or development environments:
+* Change API_URL variable in /src/services/Api.js from **https://gratibox-back-driven.herokuapp.com** to **http://localhost:yourBackEndPortNumber** with yourBackEndPortNumber being the PORT variable value set in your backend .env file (.env.dev or .env.test)
 
-<!-- CONTACT -->
-## Contact
+8. Run the front-end with
+```
+npm start
+```
+9. You can optionally build the project running (See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information)
+```
+npm run build
+```
+10. Finally access http://localhost:3000 on your favorite browser (unless it is Internet Explorer. In this case, review your life decisions :eyes:)
 
-Project Link: [https://github.com/PMafra/GratiBox_front](https://github.com/PMafra/GratiBox_front)
+## Running tests with cypress
+
+1. Change API_URL variable in /src/services/Api.js to **http://localhost:yourBackEndPortNumber** with yourBackEndPortNumber being the PORT variable value set in your backend .env.test file
+
+2. Run the front-end with
+```
+npm start
+```
+3. Run the back-end server with
+```
+npx nodemon /src/server.js
+```
+   or:
+```
+npx ntl
+```
+* Choose 'test' option
+
+4. Open Cypress test runner window
+```
+npx cypress open
+```
+   or: 
+```
+node_modules/.bin/cypress open
+```
+5. Finally click on "Run X integration spec" in the upper right corner to run integration tests
+
+More information: [Follow these instructions to run the tests in CI.](https://on.cypress.io/continuous-integration)
+
+**If you get stuck, here is more help: [Cypress Support](https://on.cypress.io/support)**
+
+
+
+
