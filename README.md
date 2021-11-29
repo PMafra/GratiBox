@@ -6,6 +6,9 @@ Try it out now at https://grati-box-front-zeta.vercel.app/
 
 ## About
 
+This project was a challenge to be developed in a maximum of 1 week. You can see about the project and the instructions for the challenge at:
+https://github.com/driven-exercises/Projeto-GratiBox
+
 Below are the implemented features:
 
 - Sign-up
