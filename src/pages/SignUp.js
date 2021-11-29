@@ -26,7 +26,7 @@ export default function SignUp() {
   const validateRepeatedPassword = () => {
     if (password !== passwordConfirmation) {
       setLoading(false);
-      setMessage('Sua confirmação de senha está errada!');
+      setMessage('Your passowrd confirmation is wrong!');
       setTimeout(() => setMessage(passwordRules), 6000);
       return false;
     }
