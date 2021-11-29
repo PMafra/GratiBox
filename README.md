@@ -1,6 +1,7 @@
 # GratiBox
 
-Try it out now at https://grati-box-front-zeta.vercel.app/
+Try it out now at https://grati-box-front-zeta.vercel.app/ <br>
+Link to back-end: https://github.com/PMafra/Gratibox_back
 
 <img width="350px" heigth="350px" src="./Gratibox.gif" />
 
