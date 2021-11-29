@@ -3,14 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.15.0",
-    "@testing-library/react": "^11.2.7",
-    "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "cep-promise": "^4.1.1",
-    "cpf-cnpj-validator": "^1.0.3",
     "date-fns": "^2.26.0",
-    "faker": "^5.5.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
@@ -54,6 +49,11 @@
     "eslint-plugin-react": "^7.27.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "husky": "7.0.4",
-    "prettier": "2.4.1"
+    "prettier": "2.4.1",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "cpf-cnpj-validator": "^1.0.3",
+    "faker": "^5.5.3"
   }
 }
