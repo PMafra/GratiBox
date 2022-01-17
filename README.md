@@ -9,6 +9,7 @@ Link to back-end: https://github.com/PMafra/Gratibox_back
 
 This project was a challenge to be developed in a maximum of 1 week. You can see about the project and the instructions for the challenge at:
 https://github.com/driven-exercises/Projeto-GratiBox
+<br>
 (Obs.: Use your mobile for a better experience)
 
 Below are the implemented features:
